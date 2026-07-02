@@ -4,8 +4,19 @@ on:
   push:
     branches: 'main'
 
+# 1. Aquí otorgamos los permisos necesarios para publicar
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
+    # 2. Declaramos el entorno de GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
